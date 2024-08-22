@@ -9,14 +9,15 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
-        changeOrigin: true // changes host, referer remain the same
-  
+        changeOrigin: true // changes host, referer remain the sameß
       },
+
       '/auth': {
         target: 'http://localhost:3000',
         changeOrigin: true // changes host, referer remain the same
   
-      }
+      },
+ 
     }
   }
 })

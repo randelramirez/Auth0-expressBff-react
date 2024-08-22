@@ -1,17 +1,8 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 export const Home = () => {
 
-    const loadData = async () => {
-        const response = await fetch('/api/test');
-        const json = await response.json();
-        console.log(json);
-    }
-
-    useEffect(()=>{
-        loadData();
-    },[])
-
+    
     return (
         <div>
             <p>Welcome to your new single-page application, built with:</p>

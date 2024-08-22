@@ -11,7 +11,7 @@ export const FetchData = () => {
       const response = await fetch("/api/weatherforecast");
 
       if (response.status === 401) {
-        window.location.href = "/api/login";
+        window.location.href = "/auth/login";
       }
 
       if (response.status === 200) {
