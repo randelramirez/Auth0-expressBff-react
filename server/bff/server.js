@@ -1,15 +1,16 @@
 const express = require("express");
 const { auth, requiresAuth } = require("express-openid-connect");
+const dotenv = require('dotenv');
 const cors = require("cors");
 const app = express();
 
 // app.use(cors({ origin: ["http://localhost:5173"] }));
-
+dotenv.config();
 app.use((req, res, next) => {
   //  res.setHeader("Origin","http://localhost:3000")
-  req.headers.origin = "http://localhost:3000";
-  req.headers.referer = "http://localhost:3000";
-  req.headers["sec-fetch-site"] = "same-origin";
+  // req.headers.origin = "http://localhost:3000";
+  // req.headers.referer = "http://localhost:3000";
+  // req.headers["sec-fetch-site"] = "same-origin";
   console.log(req.headers);
   next();
 });
@@ -23,6 +24,9 @@ const config = {
   secret: process.env.SECRET,
   // routes:{login: '/auth/login', callback: '/auth/callback', logout: '/auth/logout'}
 };
+
+
+console.log({config});
 
 // The `auth` router attaches /login, /logout
 // and /callback routes to the baseURL
@@ -47,9 +51,9 @@ app.use(
 
 app.get("/auth/login", async (req, res) => {
   //  res.setHeader("Origin","http://localhost:3000")
-  req.headers.origin = "http://localhost:3000";
-  req.headers.referer = "http://localhost:3000";
-  req.headers["sec-fetch-site"] = "same-origin";
+  // req.headers.origin = "http://localhost:3000";
+  // req.headers.referer = "http://localhost:3000";
+  // req.headers["sec-fetch-site"] = "same-origin";
   return await res.oidc.login({
     returnTo: "http://localhost:5173",
     authorizationParams: {
@@ -59,9 +63,9 @@ app.get("/auth/login", async (req, res) => {
 });
 
 app.get("/auth/logout", (req, res) => {
-  req.headers.origin = "http://localhost:3000";
-  req.headers.referer = "http://localhost:3000";
-  req.headers["sec-fetch-site"] = "same-origin";
+  // req.headers.origin = "http://localhost:3000";
+  // req.headers.referer = "http://localhost:3000";
+  // req.headers["sec-fetch-site"] = "same-origin";
   res.oidc.logout({
     returnTo: "http://localhost:3000",
   });
@@ -96,8 +100,8 @@ app.get("/", (req, res) => {
 app.get(
   "/api/profile",
   requiresAuth((req) => {
-    req.headers.origin = "http://localhost:3000";
-    req.headers.referer = "http://localhost:3000";
+    // req.headers.origin = "http://localhost:3000";
+    // req.headers.referer = "http://localhost:3000";
     req.headers["sec-fetch-site"] = "same-origin";
   }),
   (req, res) => {

@@ -39,7 +39,7 @@ export const NavMenu = (props:any) => {
                                 <NavLink tag={Link} className="text-dark" onClick={()=> {login();}}>Login</NavLink>
                             </NavItem>}
                             {isAuthenticated && <NavItem>
-                                <NavLink tag={Link} className="text-dark" onClick={()=> {login();}}>Logout</NavLink>
+                                <NavLink tag={Link} className="text-dark" onClick={()=> {logout();}}>Logout</NavLink>
                             </NavItem>}
                         </ul>
                     </Collapse>
