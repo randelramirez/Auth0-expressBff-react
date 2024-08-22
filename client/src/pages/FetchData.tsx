@@ -8,7 +8,7 @@ export const FetchData = () => {
   const fetchWeather = async () => {
     //TODO: refactor error handling later
     try {
-      const response = await fetch("weatherforecast");
+      const response = await fetch("/api/weatherforecast");
 
       if (response.status === 401) {
         window.location.href = "/api/login";
