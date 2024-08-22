@@ -1,19 +1,9 @@
 const express = require("express");
 const { auth, requiresAuth } = require("express-openid-connect");
 const dotenv = require('dotenv');
-const cors = require("cors");
 const app = express();
 
-// app.use(cors({ origin: ["http://localhost:5173"] }));
 dotenv.config();
-app.use((req, res, next) => {
-  //  res.setHeader("Origin","http://localhost:3000")
-  // req.headers.origin = "http://localhost:3000";
-  // req.headers.referer = "http://localhost:3000";
-  // req.headers["sec-fetch-site"] = "same-origin";
-  console.log(req.headers);
-  next();
-});
 
 const config = {
   authRequired: process.env.AUTH_REQUIRED,
@@ -41,7 +31,7 @@ app.use(
       // Pass a custom path to redirect users to a different
       // path after logout.
       postLogoutRedirect: "/custom--redirect-logout",
-
+      
       logout: false,
 
       // Override the default callback route to use your own callback route as shown below
@@ -123,6 +113,21 @@ app.get(
 app.get("/api/test", (req, res) => {
   res.send(JSON.stringify({ message: "okay" }, null, 2));
 });
+
+
+
+const summaries = [
+  "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+  "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+];
+
+
+app.get('/api/weatherforecast', async(req, res) => {
+  const data = await fetch("http://localhost:3002/api/weatherforecast");
+  console.log(data);
+  res.send(await data.json());
+});
+
 
 app.listen(3000, function () {
   console.log("Listening on http://localhost:3000");
