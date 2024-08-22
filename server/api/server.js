@@ -32,10 +32,16 @@ function getWeatherForecast() {
   const rng = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
   return Array.from({ length: 5 }, (_, index) => {
+    const date = new Date(Date.now() + (index + 1) * 24 * 60 * 60 * 1000).toISOString().split('T')[0];// Date in YYYY-MM-DD format
+    const temperatureC = rng(-20, 55);
+    const temperatureF = 32 + (temperatureC / 0.5556);
+    const summary = summaries[rng(0, summaries.length - 1)]
+
     return {
-      date: new Date(Date.now() + (index + 1) * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Date in YYYY-MM-DD format
-      temperatureC: rng(-20, 55),
-      summary: summaries[rng(0, summaries.length - 1)]
+      date,
+      temperatureC,
+      temperatureF,
+      summary
     };
   });
 }
