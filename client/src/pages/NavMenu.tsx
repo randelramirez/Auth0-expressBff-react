@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import { useAuth } from '../context/useAuth';
 
-export const NavMenu = (props:any) => {
+export const NavMenu = (_props:any) => {
     // login and logout are not handled by react router
     const { isAuthenticated, login, logout } = useAuth();
 
